@@ -1,0 +1,18 @@
+= Version
+
+[source,bash]
+----
+git metadata version
+git metadata --version
+----
+
+show the currently installed *git-metadata* version. Using the option *--short* will
+print the version number only. The metadata serialization version of the tool
+is provided when using the argument *--serialization*:
+
+[source,bash]
+----
+git metadata version --serialization --short
+----
+
+will print the metadata serialization version number of the *git-metadata* tool only.

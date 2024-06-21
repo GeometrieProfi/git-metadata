@@ -1,0 +1,15 @@
+= Unsupported Characters
+
+In general, avoid to use file/folder names with unusual characters, also try to
+avoid white space although the tool should be able to handle white space. The problem
+with unusual characters is the different interpretation of the respective file
+by *git ls-files* and by the *stat* tool which provides the metadata. If keeping
+files with odd characters, set the following values in the git config
+
+[source,shell]
+----
+git config core.precomposeunicode true
+git config core.quotepath false
+----
+
+NOTE: This must be done for each *git-metadata* client of the respective repository!

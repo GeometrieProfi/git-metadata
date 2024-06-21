@@ -1,0 +1,30 @@
+= Push
+
+In order to push to a remote binary repository a remote-binary must be set up
+beforehand, see the respective config section. Synchronization is done by *rsync*.
+
+[source,shell]
+----
+git metadata push <remote-binary>
+----
+
+will push the local binary files to remote if the following conditions hold
+
+i) local binaries did not change since last local metadata update.
+ii) latest metadata commit on git-repo represents metadata of local binaries.
+iii) metadata of local binaries are ahead of remote metadata.
+
+Files which are not present locally will be deleted from remote server which means
+that local and remote binaries will be in one-to-one correspondence after synchronization.
+Files that are tracked by *git* and _.bin-exclude_ files/patterns will be ignored
+by *rsync*.
+
+A force push can be done with the optional argument *--force*:
+[source,shell]
+----
+git metadata push --force <remote-binary>
+----
+
+In this case only the above requirements (i) and (ii) will be checked before calling
+*rsync*. Notice that these conditions are not relaxed further to avoid invalid
+remote states.

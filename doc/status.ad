@@ -1,0 +1,21 @@
+= Status
+
+The status of the metadata tracking is obtained by
+
+[source,shell]
+----
+git metadata status <optional remote-binary>
+----
+
+If no argument is provided, the command shows the status of the local metadata
+tracking. Otherwise, a remote-binary must be defined beforehand in the _.git/config_
+or _.gitconfig_ file, see the respective config section.
+
+The output of the status command depends on the optional parameter and if a remote
+git repository was set up for git-metadata. The command
+
+[source,shell]
+----
+git metadata status --all
+----
+provides the metadata status for all remote binaries.

@@ -1,0 +1,33 @@
+= Update
+
+The metadata file _.bin-metadata_ is updated by the command
+
+[source,shell]
+----
+git metadata update <optional args>
+----
+
+Arguments are optional and can be a combination of the following:
+
+* *--force* : Forcing an update if certain reasons prevent a standard update
+* "my commit message": A string which is used as git commit message or arguments
+which are directly provided to the *git commit* command.
+
+If no argument or no commit message is provided, the git commit is done with the
+default message "Metadata update <number>". Hence, the commands
+
+[source,shell]
+----
+git metadata update --force -m "this is my commit message"
+git metadata update "this is my commit message" --force
+----
+
+result in the same action. It will update the file _.bin-metadata_ with the latest
+metadata of the binaries and commits the changes to the git repo. Afterwards the
+commit-sha is put to the file _.bin-commit_ in order to know the last signature of
+the local update. A non-forced update is only possible if the commit-sha in this file
+coincides with the commit-sha in the git repository of the last change of the file
+_.bin-metadata_. In general, both commit-sha can be different only if remotes
+are present, i.e. the commit sha in _.bin-commit_ is mostly used to prove divergent
+situations. Deletion of the local file _.bin-commit_ is pretty much the same as a
+*--force* update.

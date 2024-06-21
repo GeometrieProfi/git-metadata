@@ -1,0 +1,6 @@
+Package: git-metadata
+Version: @GIT-METADATA-VERSION@
+Maintainer: Geometrie Profi <geometrieprofi@gmail.com>
+Description: Tool for tracking metadata of binary files by git
+Architecture: all
+Depends: git, diffutils, rsync

@@ -1,0 +1,16 @@
+= Show
+
+[source,bash]
+----
+git metadata show [config, pointer, remote-binary]
+----
+
+prints information depending on the mandatory argument:
+
+[cols="20,~"]
+|===
+|pointer|the currently available commit pointer that can be used with the diff
+command.
+|remote-binary|provides a list of configured remote binary repositories.
+|config|git-metadata config values that are used.
+|===

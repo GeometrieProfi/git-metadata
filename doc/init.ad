@@ -1,0 +1,56 @@
+= Init
+
+A local git repo is required in order to initialize tracking of binary-metadata. Git
+submodules are not supported. If a git repo is not yet present and not supposed
+to be cloned from a remote repository, then change to the folder whose binaries
+should be tracked:
+
+[source,shell]
+----
+git init --initial-branch=main
+----
+
+If git repo is already present, checkout the branch which should be used to track
+metadata by git, usually it is the default branch. In order to initialize metadata
+tracking for the *standard* repository type, execute
+
+[source,shell]
+----
+git metadata init standard
+----
+This will define the metadata tracking branch in _.gitconfig_ and add/adjusts the
+_.gitignore_ file. For instance, the file _.bin-commit_ which holds the git commit-sha
+of latest _.bin-metadata_ update must be ignored by git, i.e. it has to be present in
+_.gitignore_. Using the *standard* repository
+type is recommended in all cases that git has to track more files than the
+required files. Updating _.gitignore_ is at your own responsibility, add binary
+files and patterns to fit your specific use case.
+
+If the repository is a plain binary folder, for instance media files, then it
+is recommended to choose the *binary* repository type which is initialized by
+[source,shell]
+----
+git metadata init binary
+----
+In this case all files will be ignored by git unless explicitly negated
+in _.gitignore_:
+
+[source]
+----
+# Required for binary repository type, do not change
+*
+!.gitignore
+!.bin-metadata
+!.bin-exclude
+!.gitconfig
+
+# Optional files not ignored by git
+!Readme.md
+!example.csv
+----
+
+NOTE: A file which is ignored by git is considered to be a binary and hence tracked by
+the git-metadata tool unless it is excluded directly or by pattern in _.bin-exclude_.
+Files or pattern that are ignored by git and present in _.bin-exclude_ are neither
+tracked by git nor by git-metadata which means that these files/patterns are not
+pushed to remote locations.

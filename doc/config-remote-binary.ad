@@ -1,0 +1,23 @@
+= Remote Binary
+
+It is possible to add one or more remote repository for the binaries,
+independently if a remote git repository exists or has been set up. Upload
+and download of files is done by *rsync*. Again a remote repo for binaries
+is added via the git-config, use the prefix _remote-binary_ and a unique name
+to identify it. For instance,
+
+[source,shell]
+----
+git config --file=.gitconfig remote-binary.alpha dude@my-bin-server:/some-volume/picture
+----
+defines a remote binary repo named <alpha> within the file _.gitconfig_ and all files
+and directories in your local folder are uploaded/downloaded by the respective
+push/pull action to the remote _picture_ folder. Trailing slashes in the url
+will be ignored.
+
+If the remote-binary name or url should not be shared, it is also possible to define
+it in the local _.git/config_ file as well:
+[source,shell]
+----
+git config remote-binary.beta dude@my-bin-server:/some-volume/hidden
+----

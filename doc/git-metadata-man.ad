@@ -1,0 +1,59 @@
+= git-metadata(1)
+Geometrie Profi
+:doctype: manpage
+:manmanual: GIT-METADATA
+:mansource: GIT-METADATA
+:man-linkstyle: pass:[blue R < >]
+
+== Name
+
+git-metadata - tool to track metadata of binaries by git
+
+== Synopsis
+
+*git-metadata {init|update|diff|status|pull|push|merge|version|help} [OPTIONS]*
+
+== Description
+
+Tracks the metadata of binary files for respective folder in the file
+_.bin-metadata_ which is part of the associated git repository in a dedicated branch.
+
+include::init.ad[leveloffset=2]
+
+include::update.ad[leveloffset=2]
+
+include::status.ad[leveloffset=2]
+
+include::diff.ad[leveloffset=2]
+
+include::push.ad[leveloffset=2]
+
+include::pull.ad[leveloffset=2]
+
+include::merge.ad[leveloffset=2]
+
+include::show.ad[leveloffset=2]
+
+include::version.ad[leveloffset=2]
+
+include::help.ad[leveloffset=2]
+
+== Additional Information
+
+include::files.ad[leveloffset=2]
+
+include::config-branch.ad[leveloffset=2]
+
+include::config-remote-binary.ad[leveloffset=2]
+
+include::config-unsupported-characters.ad[leveloffset=2]
+
+== Bugs or Feature Requests
+
+Please send bugs or feature requests to geometrieprofi@gmail.com
+
+== Copyright
+
+Copyright © 2024 Geometri Profi.  License GPLv3+: GNU GPL version 3 or
+later <https://gnu.org/licenses/gpl.html>. This is free software: you are free to
+change and redistribute it. There is NO WARRANTY, to the extent permitted by law.

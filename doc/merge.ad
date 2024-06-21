@@ -1,0 +1,39 @@
+= Merge
+
+If in a divergent situation the *merge* command may be the best choice to prevent
+data loss, but may also need prior preparations or some rework after execution to
+prevent garbage data. Hence, it is highly recommended to use the *git metadata diff*
+command with the options *--changed* and *--merge-base* before running a *merge*
+action. In order to do a downstream merge with a remote binary repository,
+a remote-binary must be set up beforehand, see the respective config section.
+Synchronization is done by *rsync*, but in general there is no complete synchronization
+between remote and local binaries when using the *merge* command.
+
+[source,shell]
+----
+git metadata merge <remote-binary> --force
+----
+
+does a forced downstream synchronization and is similar to the force-pull action
+except that
+
+i) local files are not deleted when they are missing remote.
+ii) in case a file is present locally and remote, then the file which was last
+modified will be used.
+
+Hence, the *merge* action is only useful on divergent situations when changes have
+been done on different workstations or by different users. A non-forced merge:
+
+[source,shell]
+----
+git metadata merge <remote-binary>
+----
+
+is only possible if there are no file conflicts which means that there is no file
+which exists locally and remote but in different version. Notice that the merge
+command is prone to garbage data since when renaming an entire subfolder and doing
+a merge action will easily lead to duplicated files in your repository. Again,
+in order to avoid such things it is highly recommended to run the *git metadata diff*
+command with the *--merge-base* option.
+
+NOTE: In most cases an *update* action should follow after a successful merge.

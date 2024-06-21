@@ -1,0 +1,153 @@
+= Diff
+
+The *diff* command shows the difference of committed and/or local metadata. Optional
+arguments are
+
+[cols="20,~"]
+|===
+|--classic|runs the diff command with the default configuration using --color option
+|--changed|provides the list of different binary files only, this is quite
+useful in divergent situations to avoid data loss before executing a merge command.
+|--merge-base|provides two diffs in divergent situation against the
+respective merge-base commit, useful to avoid file duplications in divergent situations.
+|===
+
+Other arguments for this command are commit-sha or unique pointers to a commit-sha.
+In order to get information about available pointers to commit-sha run
+[source,bash]
+----
+git metadata show pointer
+----
+
+The *diff* command compares metadata depending on how many of these commit arguments are
+provided:
+
+== No commit argument
+
+Shows the local changes since the last successful update command which means that the
+diff is done between metadata committed on last (local) *git-metadata update*
+command and the current local metadata. For instance, if
+[source,bash]
+----
+git metadata diff
+----
+
+prints
+[source,bash]
+----
+f folder/fileA,4,1666340647,-rw-r--r--
+f folder/fileB,100,1666340652,-rw-r--r--
+f pictureC.jpg,2032,1663263526,-rw-r--r--
+c pictureD.jpg,28382,1666340652,-rw-r--r--
+c videoD.mpg,2032749,1663263526,-rw-r--r--
+f videoD.mpg,2032750,1666359255,-rw-r--r--
+Metadata of local binaries are different from metadata for commit-state@local-bin: 'c' commit-state@local-bin, 'f' local file, File version differs if appears twice in both colors.
+----
+
+it means that
+
+* files _folder/fileA_, _folder/fileB_, _pictureC.jpg_ are present now, but were not
+present on last successful *git metadata update* command.
+* file _pictureD.jpg_ was still present on last successful *git metadata update*
+command, but is no longer present, i.e. it was removed.
+* file _videoD.mpg_ changed since last successful *git metadata update* command.
+
+In the above situation
+[source,bash]
+----
+git metadata diff --changed
+----
+
+would only print the file name
+[source,bash]
+----
+videoD.mpg
+----
+
+Notice that the option *--merge-base* can not be used if commit arguments are omitted.
+
+== One commit argument
+
+Shows the diff between metadata for provided commit argument and the current local
+metadata. In fact, if commit-state@local-bin points to
+"2bc156f6f495605f6dde0e98303b00ac07ba6065", then the following commands are equivalent:
+[source,bash]
+----
+git metadata diff
+git metadata diff commit-state@local-bin
+git metadata diff 2bc156f6f495605f6dde0e98303b00ac07ba6065
+----
+
+Another unique pointer to a commit is a remote-binary name defined in git config. For
+instance if _alpha_ is such a remote-binary, then _alpha_ and _commit-state@alpha_
+point to the same commit-sha which is provided by the file _.bin-commit_ at the
+remote-url determined by _alpha_. Hence, assuming that the latest metadata
+commit at remote-git _origin_ equals the metadata commit-state of _alpha_, then
+the following commands:
+[source,bash]
+----
+git metadata diff alpha
+git metadata diff commit-state@alpha
+git metadata diff metadata-commit@origin
+----
+provide the same output and compare the current local metadata with metadata at remote _alpha_.
+
+== Two commit arguments
+
+Shows the diff between metadata of provided commit arguments. For instance,
+[source,bash]
+----
+git metadata diff <remote-binary> commit-state@local-bin
+git metadata diff commit-state@<remote-binary> commit-state@local-bin
+----
+
+are equivalent commands and provided the diff between metadata at <remote-binary> and
+metadata committed with last successful *git metadata update* command.
+
+== Merge-based diff
+
+Using the diff command with the *--merge-base* option requires one or two commit
+arguments. In case the commits are not divergent, a standard diff is printed, but
+in case there is a non-trivial merge base, two diffs are printed.
+
+If only one commit argument <A> is provided, the *merge-base-commit* is given by
+[source,bash]
+----
+git merge-base <A> <commit-state@local-bin>
+----
+
+Assuming that the *merge-base-commit* is different from <A>, the command
+[source,bash]
+----
+git metadata diff --merge-base <A>
+----
+
+shows more or less the diffs of
+[source,bash]
+----
+git metadata diff <merge-base-commit> <A>
+git metadata diff <merge-base-commit>
+----
+
+where the second command is as described above the diff between the current local
+metadata and the metadata committed for *merge-base-commit*.
+
+Assuming that two commit arguments <A> and <B> are provided, then the
+*merge-base-commit* is given by
+[source,bash]
+----
+git merge-base <A> <B>
+----
+
+Moreover, if <A> and <B> are divergent, then
+[source,bash]
+----
+git metadata diff --merge-base <A> <B>
+----
+
+will show the diffs of
+[source,bash]
+----
+git metadata diff <merge-base-commit> <A>
+git metadata diff <merge-base-commit> <B>
+----

@@ -1,0 +1,11 @@
+= Files
+
+[cols="20,~"]
+|===
+|.bin-commit|Holds the git commit sha from the last successful update command.
+|.bin-exclude|Can be used to define files/patterns that are ignored by metadata tracking.
+|.bin-metadata|The file which holds the metadata of the binaries.
+|.gitconfig|Git config values that are shared for the repo among git-metadata clients.
+|.gitignore|Files that are ignored by git, but enabled for metadata tracking unless
+excluded in _.bin-exclude_
+|===

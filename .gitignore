@@ -1,0 +1,6 @@
+# Exclude everything from debian build directory
+**/build/
+# IntelliJ
+**/.idea/*
+*.iml
+*.ipr

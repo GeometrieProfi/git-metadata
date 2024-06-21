@@ -1,0 +1,13 @@
+= The file .gitconfig
+
+_.gitconfig_ is used to share git config values. It should contain the default
+branch used for metadata tracking which can be retrieved by
+
+[source,shell]
+----
+git config --file=.gitconfig metadata.branch
+----
+The value is set by the *git-metadata init* command and should not be changed. Notice
+that the default tracking branch is shared between clients meaning that the information
+must be committed and can not be in client git config. Adding remote binary repositories
+is optional and can be done within the _.git/config_ file or within _.gitconfig_.

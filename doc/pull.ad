@@ -1,0 +1,23 @@
+= Pull
+
+In order to pull from a remote binary repository a remote-binary must be set up
+beforehand, see the respective config section. Synchronization is done by *rsync*.
+
+[source,shell]
+----
+git metadata pull <remote-binary>
+----
+
+does a downstream synchronization with deletion of local files that are missing remote if
+
+i) local binaries did not change since last successful local metadata update
+ii) remote binaries are ahead of local binaries
+iii) latest metadata update in git repository represents metadata of remote binaries
+
+A force pull can be done with the optional argument *--force*:
+[source,shell]
+----
+git metadata pull --force <remote-binary>
+----
+
+In this case only the requirement (iii) will be checked before calling *rsync*.

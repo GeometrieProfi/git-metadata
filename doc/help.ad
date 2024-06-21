@@ -1,0 +1,9 @@
+= Help
+
+[source,bash]
+----
+git metadata help
+git metadata --help
+----
+
+provide the man page for *git-metadata*.

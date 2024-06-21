@@ -1,0 +1,4 @@
+_git_metadata()
+{
+  __gitcomp "$(git-metadata arguments ${COMP_WORDS[@]})"
+}
