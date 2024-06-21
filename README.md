@@ -17,9 +17,9 @@ to know which file changed or moved and is newest.
 * _DEBIAN/control_: the control file for the debian package
 * _doc/*_: the manual
 * _.gitignore_: files and patterns that should be ignored by git
-* _.gitlab-ci.yml_: the CI configuration for gitlab
 * _build-debian.sh_: the script building the debian package
 * _git-metadata.sh_: the main script executing git-metadata commands
+* _LICENSE.txt_: the license
 * _README.md_: this file
 
 ## Feature
