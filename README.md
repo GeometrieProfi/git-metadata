@@ -65,7 +65,7 @@ sudo asciidoctor -b manpage doc/git-metadata-man.ad -o - | gzip -c > /usr/local/
 
 ## User manual
 
-Available in the [doc](doc/index.ad) folder.
+Available in the [doc](doc/index.adoc) folder.
 
 ## Copyright
 

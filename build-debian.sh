@@ -31,7 +31,7 @@ copy_files() {
   mkdir -p ${MANUAL_DESTINATION}
   mkdir -p ${COMPLETION_DESTINATION}
   cp -R DEBIAN ${PACKAGE_DIR}/
-  asciidoctor -b manpage doc/git-metadata-man.ad -o - | gzip -c > ${MANUAL_DESTINATION}/git-metadata.1.gz
+  asciidoctor -b manpage doc/git-metadata-man.adoc -o - | gzip -c > ${MANUAL_DESTINATION}/git-metadata.1.gz
   cp git-metadata.sh ${EXECUTABLE_FILE}
   cp git-metadata-completion ${COMPLETION_DESTINATION}/
 }
